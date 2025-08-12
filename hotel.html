@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Booking Search with Booking Feature</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 min-h-screen p-6 text-gray-250">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-4xl font-bold mb-6 text-center text-gray-200">Hotel Booking Search</h1>
+     <!-- Search Bar -->
+    <div class="mb-8">
+      <label for="search" class="block mb-2 text-lg font-medium text-gray-500">Search by Category:</label>
+      <select id="search" class="w-full p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="all">All</option>
+        <option value="luxury">Luxury Hotels</option>
+        <option value="resort">Resorts</option>
+        <option value="budget">Budget Friendly</option>
+      </select>
+    </div>
+    <!-- Hotel Cards -->
+    <div id="cards" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1: Luxury Hotels -->
+      <div data-category="luxury" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+        <img src="lux.jpg" alt="Luxury Hotel" class="w-full h-48 object-cover" />
+        <div class="p-5 flex-grow">
+          <h2 class="text-xl font-semibold mb-2">Grand Royal Luxury Hotel</h2>
+          <p class="text-gray-600 mb-3">Experience elegance and comfort in heart of city with premium amenities.</p>
+          <span class="inline-block bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-semibold">Luxury</span>
+        </div>
+        <button
+          class="m-5 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
+          onclick="openBookingModal('Grand Royal Luxury Hotel')"
+        >
+          Book Now
+        </button>
+      </div>
+      <!-- Card 2: Resorts -->
+      <div data-category="resort" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Resort" class="w-full h-48 object-cover" />
+        <div class="p-5 flex-grow">
+          <h2 class="text-xl font-semibold mb-2">Seaside Paradise Resort</h2>
+          <p class="text-gray-600 mb-3">Relax and unwind in a scenic coastal resort with amazing views and activities.</p>
+          <span class="inline-block bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-semibold">Resort</span>
+        </div>
+        <button
+          class="m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
+          onclick="openBookingModal('Seaside Paradise Resort')"
+        >
+          Book Now
+        </button>
+      </div>
+      <!-- Card 3: Budget Friendly -->
+      <div data-category="budget" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80" alt="Budget Hotel" class="w-full h-48 object-cover" />
+        <div class="p-5 flex-grow">
+          <h2 class="text-xl font-semibold mb-2">Cozy Budget Inn</h2>
+          <p class="text-gray-600 mb-3">Affordable and comfortable stays perfect for budget travelers.</p>
+          <span class="inline-block bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">Budget</span>
+        </div>
+        <button
+          class="m-5 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
+          onclick="openBookingModal('Cozy Budget Inn')"
+        >
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+<!-- Booking Modal -->
+  <div
+    id="bookingModal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+  >
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+      <button
+        onclick="closeBookingModal()"
+        class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold"
+        aria-label="Close modal"
+      >&times;</button>
+      <h2 id="modalHotelName" class="text-2xl font-semibold mb-4">Book Hotel</h2>
+      <form id="bookingForm" class="space-y-4">
+        <div>
+          <label for="name" class="block font-medium text-gray-700">Full Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Your full name"
+          />
+        </div>
+        <div>
+          <label for="email" class="block font-medium text-gray-700">Email Address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="you@example.com"
+          />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="checkin" class="block font-medium text-gray-700">Check-in Date</label>
+            <input
+              id="checkin"
+              name="checkin"
+              type="date"
+              required
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label for="checkout" class="block font-medium text-gray-700">Check-out Date</label>
+            <input
+              id="checkout"
+              name="checkout"
+              type="date"
+              required
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
+        >
+          Confirm Booking
+        </button>
+      </form>
+      <p
+        id="confirmationMessage"
+        class="hidden mt-4 text-green-600 font-semibold text-center"
+      >
+        Booking confirmed! Thank you.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const searchSelect = document.getElementById('search');
+    const cards = document.querySelectorAll('#cards > div');
+
+    searchSelect.addEventListener('change', () => {
+      const selected = searchSelect.value;
+
+      cards.forEach(card => {
+        if (selected === 'all' || card.dataset.category === selected) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    const bookingModal = document.getElementById('bookingModal');
+    const modalHotelName = document.getElementById('modalHotelName');
+    const bookingForm = document.getElementById('bookingForm');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+
+    function openBookingModal(hotelName) {
+      modalHotelName.textContent = `Book: ${hotelName}`;
+      bookingForm.style.display = 'block';
+      confirmationMessage.classList.add('hidden');
+      bookingForm.reset();
+      bookingModal.classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      bookingModal.classList.add('hidden');
+    }
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple validation (check-in < check-out)
+      const checkin = bookingForm.checkin.value;
+      const checkout = bookingForm.checkout.value;
+      if (checkout <= checkin) {
+        alert('Check-out date must be after check-in date');
+        return;
+      }
+
+      bookingForm.style.display = 'none';
+      confirmationMessage.classList.remove('hidden');
+    });
+    bookingModal.addEventListener('click', (e) => {
+      if (e.target === bookingModal) {
+        closeBookingModal();
+      }
+    });
+  </script>  
+</body>
+</html>
